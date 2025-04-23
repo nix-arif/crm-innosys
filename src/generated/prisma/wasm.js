@@ -117,12 +117,48 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.ManufacturerScalarFieldEnum = {
+  id: 'id',
+  manufacturerName: 'manufacturerName',
+  addressLine1: 'addressLine1',
+  addressLine2: 'addressLine2',
+  addressLine3: 'addressLine3',
+  poscode: 'poscode',
+  city: 'city',
+  country: 'country'
+};
+
 exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
   productCode: 'productCode',
   description: 'description',
   unitPrice: 'unitPrice',
   oum: 'oum',
+  manufacturerId: 'manufacturerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.StoreScalarFieldEnum = {
+  id: 'id',
+  storeName: 'storeName',
+  addressLine1: 'addressLine1',
+  addressLine2: 'addressLine2',
+  addressLine3: 'addressLine3',
+  poscode: 'poscode',
+  city: 'city',
+  state: 'state',
+  createdAt: 'createdAt',
+  updateAt: 'updateAt'
+};
+
+exports.Prisma.StockScalarFieldEnum = {
+  id: 'id',
+  lotNo: 'lotNo',
+  manufactureDate: 'manufactureDate',
+  expiredDate: 'expiredDate',
+  qty: 'qty',
+  productId: 'productId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -137,9 +173,17 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
-  Product: 'Product'
+  Manufacturer: 'Manufacturer',
+  Product: 'Product',
+  Store: 'Store',
+  Stock: 'Stock'
 };
 
 /**
