@@ -49,7 +49,8 @@ const SignInForm = () => {
         toast.success("Login succesfully");
         router.push("/dashboard");
       } else {
-        toast.error(res?.error);
+        console.log(res.error);
+        // toast.error(res?.error);
       }
     } catch (err) {}
   }
