@@ -14,15 +14,64 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Manufacturer {
-  id               String  @id @default(cuid())
-  manufacturerName String
-  addressLine1     String
-  addressLine2     String
-  addressLine3     String?
-  poscode          String
-  city             String
-  country          String
+model User {
+  id           String     @id @default(cuid())
+  fullname     String?
+  username     String
+  email        String     @unique
+  hashPassword String
+  role         Role       @default(STAFF)
+  department   Department @default(UNASSIGN)
+  icNo         String?
+  epfNo        String?
+  socsoNo      String?
+  phoneNo      String?
+  addressLine1 String?
+  addressLine2 String?
+  addressLine3 String?
+  poscode      String?
+  city         String?
+  state        String?
+
+  session Session[]
+  store   Store?
+}
+
+model Session {
+  id        String   @id
+  userId    String
+  expiresAt DateTime
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+enum Role {
+  SUPERADMIN
+  DIRECTOR
+  MANAGER
+  ADMIN
+  STAFF
+}
+
+enum Department {
+  UNASSIGN
+  MANAGEMENT
+  SALES
+  MARKETING
+  LOGISTIC
+}
+
+model Supplier {
+  id           String  @id @default(cuid())
+  supplierName String
+  phone        String?
+  email        String?
+  addressLine1 String
+  addressLine2 String
+  addressLine3 String?
+  poscode      String
+  city         String
+  country      String
 
   // relationship
   products Product[]
@@ -36,9 +85,9 @@ model Product {
   oum         String
 
   // relationship
-  manufacturerId String
-  manufacturer   Manufacturer @relation(fields: [manufacturerId], references: [id])
-  stocks         Stock[]
+  supplierId String
+  supplier   Supplier @relation(fields: [supplierId], references: [id])
+  stocks     Stock[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -54,6 +103,8 @@ model Store {
   city         String
   state        String
 
+  userId String  @unique
+  user   User    @relation(fields: [userId], references: [id])
   stocks Stock[]
 
   createdAt DateTime @default(now())

@@ -117,9 +117,37 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.ManufacturerScalarFieldEnum = {
+exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
-  manufacturerName: 'manufacturerName',
+  fullname: 'fullname',
+  username: 'username',
+  email: 'email',
+  hashPassword: 'hashPassword',
+  role: 'role',
+  department: 'department',
+  icNo: 'icNo',
+  epfNo: 'epfNo',
+  socsoNo: 'socsoNo',
+  phoneNo: 'phoneNo',
+  addressLine1: 'addressLine1',
+  addressLine2: 'addressLine2',
+  addressLine3: 'addressLine3',
+  poscode: 'poscode',
+  city: 'city',
+  state: 'state'
+};
+
+exports.Prisma.SessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  expiresAt: 'expiresAt'
+};
+
+exports.Prisma.SupplierScalarFieldEnum = {
+  id: 'id',
+  supplierName: 'supplierName',
+  phone: 'phone',
+  email: 'email',
   addressLine1: 'addressLine1',
   addressLine2: 'addressLine2',
   addressLine3: 'addressLine3',
@@ -134,7 +162,7 @@ exports.Prisma.ProductScalarFieldEnum = {
   description: 'description',
   unitPrice: 'unitPrice',
   oum: 'oum',
-  manufacturerId: 'manufacturerId',
+  supplierId: 'supplierId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -148,6 +176,7 @@ exports.Prisma.StoreScalarFieldEnum = {
   poscode: 'poscode',
   city: 'city',
   state: 'state',
+  userId: 'userId',
   createdAt: 'createdAt',
   updateAt: 'updateAt'
 };
@@ -177,10 +206,26 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.Role = exports.$Enums.Role = {
+  SUPERADMIN: 'SUPERADMIN',
+  DIRECTOR: 'DIRECTOR',
+  MANAGER: 'MANAGER',
+  ADMIN: 'ADMIN',
+  STAFF: 'STAFF'
+};
 
+exports.Department = exports.$Enums.Department = {
+  UNASSIGN: 'UNASSIGN',
+  MANAGEMENT: 'MANAGEMENT',
+  SALES: 'SALES',
+  MARKETING: 'MARKETING',
+  LOGISTIC: 'LOGISTIC'
+};
 
 exports.Prisma.ModelName = {
-  Manufacturer: 'Manufacturer',
+  User: 'User',
+  Session: 'Session',
+  Supplier: 'Supplier',
   Product: 'Product',
   Store: 'Store',
   Stock: 'Stock'
