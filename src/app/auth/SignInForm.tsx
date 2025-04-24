@@ -43,13 +43,15 @@ const SignInForm = () => {
   });
 
   async function onSubmit(values: z.infer<typeof signInSchema>) {
-    const res = await signIn(values);
-    if (res?.success) {
-      toast.success("Login succesfully");
-      router.push("/dashboard");
-    } else {
-      toast.error(res?.error);
-    }
+    try {
+      const res = await signIn(values);
+      if (res?.success) {
+        toast.success("Login succesfully");
+        router.push("/dashboard");
+      } else {
+        toast.error(res?.error);
+      }
+    } catch (err) {}
   }
 
   return (
