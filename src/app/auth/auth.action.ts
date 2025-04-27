@@ -32,8 +32,7 @@ export const signIn = async (values: z.infer<typeof signInSchema>) => {
     );
     return { success: true, error: "", message: "" };
   } catch (error) {
-    console.log(error);
-    return { success: false, error, message: "" };
+    return { success: false, error: "Something went wrong!", message: "" };
   }
 };
 
