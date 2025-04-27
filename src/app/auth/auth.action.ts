@@ -23,13 +23,13 @@ export const signIn = async (values: z.infer<typeof signInSchema>) => {
       return { success: false, error: "Invalid Credentials!", message: "" };
 
     // Successfully login
-    const session = await lucia.createSession(user.id, {});
-    const sessionCookie = await lucia.createSessionCookie(session.id);
-    (await cookies()).set(
-      sessionCookie.name,
-      sessionCookie.value,
-      sessionCookie.attributes
-    );
+    // const session = await lucia.createSession(user.id, {});
+    // const sessionCookie = await lucia.createSessionCookie(session.id);
+    // (await cookies()).set(
+    //   sessionCookie.name,
+    //   sessionCookie.value,
+    //   sessionCookie.attributes
+    // );
     return { success: true, error: "", message: "" };
   } catch (error) {
     return { success: false, error: "Something went wrong!", message: "" };
