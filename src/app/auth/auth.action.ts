@@ -14,25 +14,24 @@ export const signIn = async (values: z.infer<typeof signInSchema>) => {
       where: { email: values.email },
     });
 
-    if (!user)
-      return { success: false, error: "Invalid Credentials!", message: "" };
+    if (!user) return { success: false, error: "Invalid Credentials!" };
 
     const isPasswordMatch = await compare(values.password, user.hashPassword);
 
     if (!isPasswordMatch)
-      return { success: false, error: "Invalid Credentials!", message: "" };
+      return { success: false, error: "Invalid Credentials!" };
 
     // Successfully login
-    // const session = await lucia.createSession(user.id, {});
-    // const sessionCookie = await lucia.createSessionCookie(session.id);
-    // (await cookies()).set(
-    //   sessionCookie.name,
-    //   sessionCookie.value,
-    //   sessionCookie.attributes
-    // );
-    return { success: true, error: "", message: "" };
+    const session = await lucia.createSession(user.id, {});
+    const sessionCookie = await lucia.createSessionCookie(session.id);
+    (await cookies()).set(
+      sessionCookie.name,
+      sessionCookie.value,
+      sessionCookie.attributes
+    );
+    return { success: true };
   } catch (error) {
-    return { success: false, error: "Something went wrong!", message: "" };
+    return { success: false, error: "Something went wrong!" };
   }
 };
 

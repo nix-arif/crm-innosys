@@ -1,16 +1,29 @@
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextRequest } from "next/server";
 
-export function middleware(request: NextRequest) {
+// 1. Specify protected and public routes
+const protectedRoutes = ["/dashboard"];
+const publicRoutes = ["/login", "/signup", "/"];
+
+export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
-  const publicRoutes = ["/auth"];
+
+  const isProtectedRoute = protectedRoutes.includes(path);
   const isPublicRoute = publicRoutes.includes(path);
   if (isPublicRoute) return NextResponse.next();
 
-  const session = request.cookies.get("crm-innosys-auth-cookie")?.value || null;
-  if (!session) {
-    return NextResponse.redirect(new URL("/auth", request.url));
-  }
+  const cookie = (await cookies()).get("crm-innosys-auth-cookie")?.value;
+  // const session = await decrypt(cookie);
+  // 4. Redirect to /login if the user is not authenticated
+
+  // if (!session) {
+  //   return NextResponse.redirect(new URL("/auth", request.url));
+  // }
+
+  // if (session) {
+  //   return NextResponse.redirect(new URL("/dashboard", request.url));
+  // }
 
   return NextResponse.next();
 }
